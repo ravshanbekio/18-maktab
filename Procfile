@@ -1,0 +1,1 @@
+web: gunicorn maktab18.wsgi --log-file -
