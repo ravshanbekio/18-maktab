@@ -1,7 +1,8 @@
+from msilib.schema import LockPermissions
 from django.shortcuts import render, redirect
-from .models import TopBlog, Text, AddLesson, Blog, Author, Comment
+from .models import Text, Lesson, Blog, Author, Comment, Feedback
 from .forms import HomeForm, ElementForm, CommentForm, ContactForm
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect
 import random
 from django.core.paginator import Paginator
 
@@ -18,13 +19,13 @@ def home(request):
         if f'saved{number}' in request.GET:
             saved = True
     blog = Blog.objects.all()[4:]
-    lessons = AddLesson.objects.all()
+    lessons = Lesson.objects.all()
     return render(request,'index.html',{'form':form,'saved':saved,'blog':blog,'lessons':lessons})
 
 def search(request):
     if request.method == "POST":
         searched = request.POST['search']
-        values = AddLesson.objects.filter(subject__contains=searched)
+        values = Lesson.objects.filter(subject__contains=searched)
         blog_values = Blog.objects.filter(title__contains=searched)
         return render(request, 'search.html',{'searched':searched, 'values':values,'blog_values':blog_values})
     else:
@@ -45,7 +46,7 @@ def courses(request):
         form = HomeForm
         if f'saved{number}' in request.GET:
             saved = True
-    courses = AddLesson.objects.all()
+    courses = Lesson.objects.all()
     return render(request, 'courses.html',{'courses':courses,'saved':saved, 'form':form})
 
 def elements(request):
@@ -64,7 +65,7 @@ def elements(request):
     return render(request, 'elements.html',{'form':form, 'saved':saved})
 
 def coursedetails(request):
-    lessons = AddLesson.objects.all()
+    lessons = Lesson.objects.all()[6:]
     return render(request, 'course-details.html',{'lessons':lessons})
 
 def blog(request):
@@ -81,11 +82,17 @@ def author(request, author_id):
     author = Author.objects.get(pk=author_id)
     return render(request, 'author.html',{'author':author})
 
-def lessons(request, lesson_id):
-    lessons = AddLesson.objects.get(pk=lesson_id)
+def lessons(request, pk):
+    lessons = Lesson.objects.get(pk=pk)
     lessons.views += 1
     lessons.save()
-    return render(request, 'course-details.html',{'lessons':lessons})
+    if request.method == "POST":
+        feedback = Feedback.objects.create(
+            course=lessons,
+            text=request.POST['feedback']
+        )
+        return redirect('lessons', pk=lessons.id)
+    return render(request, 'course-details.html',{'lessons':lessons})   
 
 def blogdetails(request,pk):
     saved = False

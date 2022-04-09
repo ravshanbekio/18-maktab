@@ -12,18 +12,6 @@ class Home(models.Model):
     class Meta:
         verbose_name_plural = 'Kurslarga yozilish'
 
-class TopBlog(models.Model):
-    title = models.CharField('Sarlavha',max_length=100)
-    text = models.TextField('Matn')
-    date = models.DateField('Sana')
-    image = CloudinaryField()
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name_plural = 'Yangiliklar'
-
 class Member(models.Model):
     email = models.EmailField('Email')
 
@@ -56,7 +44,7 @@ class Element(models.Model):
     class Meta:
         verbose_name_plural = 'Arizalar'
 
-class AddLesson(models.Model):
+class Lesson(models.Model):
     subject = models.CharField('Fan',max_length=50)
     cost = models.CharField('Narx',max_length=50)
     teacher_name = models.CharField("O'qituvchi ismi",max_length=200)
@@ -127,3 +115,14 @@ class Comment(models.Model):
     class Meta:
         verbose_name_plural = 'Izohlar'
 
+class Feedback(models.Model):
+    course = models.ForeignKey(Lesson, on_delete=models.SET_NULL, null=True)
+    text = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text
+
+    class Meta:
+        ordering = ['course',]
+        verbose_name_plural = "Fikrlar"

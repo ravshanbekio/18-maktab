@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Home,TopBlog, Member, Text, Element, AddLesson, Blog, Contact, Author, Comment
+from .models import Home, Member, Text, Element, Lesson, Blog, Contact, Author, Comment, Feedback
 
 @admin.register(Home)
 class HomeAdmin(admin.ModelAdmin):
@@ -9,7 +9,6 @@ class HomeAdmin(admin.ModelAdmin):
     ordering = ['name']
     search_fields = ['name','email']
 
-admin.site.register(TopBlog)
 admin.site.register(Member)
 admin.site.register(Text)
 
@@ -21,7 +20,7 @@ class ElementsAdmin(admin.ModelAdmin):
     ordering = ['name','sourname']
     search_fields = ['name','sourname','phone_number']
 
-@admin.register(AddLesson)
+@admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
     fields = ('subject','cost','teacher_name','in_week','time','description','image')
     list_display = ('subject','cost')
@@ -44,3 +43,4 @@ class AuthorAdmin(admin.ModelAdmin):
 
 admin.site.register(Blog)
 admin.site.register(Comment)
+admin.site.register(Feedback)
