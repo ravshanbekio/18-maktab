@@ -425,8 +425,7 @@
           <h4>Yangiliklar tasmasi</h4>
           <p>Yangiklardan xabardor bo'lib turish uchun obuna bo'ling</p>
           <div class="form-wrap" id="mc_embed_signup">
-            <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-              method="get" class="form-inline">
+            <form method="POST" class="form-inline">{% csrf_token %}
               <input class="form-control" name="EMAIL" placeholder="Elektron Pochta" onfocus="this.placeholder = ''"
                 onblur="this.placeholder = 'Elektron Pochta '" required="" type="email">
               <button class="click-btn btn btn-default text-uppercase">obuna</button>

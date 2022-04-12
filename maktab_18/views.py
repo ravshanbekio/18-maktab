@@ -1,15 +1,29 @@
-from msilib.schema import LockPermissions
 from django.shortcuts import render, redirect
-from .models import Text, Lesson, Blog, Author, Comment, Feedback
+from .models import Text, Lesson, Blog, Author, Comment, Feedback, Member
 from .forms import HomeForm, ElementForm, CommentForm, ContactForm
 from django.http import HttpResponseRedirect
 import random
 from django.core.paginator import Paginator
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
 
 def home(request):
     number = random.randint(1234567890, 1234567890123456789)
     saved = False
     if request.method == "POST":
+        member = Member.objects.create(
+            email=request.POST['EMAIL']
+        )
+        template = render_to_string('email_template.html')
+        email = EmailMessage(
+            "Yangiliklar tasmasiga obuna bo'lganingiz uchun tashakkur!",
+            template,
+            settings.EMAIL_HOST_USER,
+            [member],
+        )
+        email.fail_silently=False
+        email.send()
         form = HomeForm(request.POST)
         if form.is_valid():
             form.save()
@@ -32,12 +46,20 @@ def search(request):
         return render(request, 'search.html',{})
 
 def about(request):
+    if request.method == "POST":
+        member = Member.objects.create(
+            email=request.POST['EMAIL']
+        )
+        return redirect('about')
     text = Text.objects.all()
     return render(request, 'about.html',{'text':text})
 def courses(request):
     number = random.randint(1234567890, 1234567890123456789)
     saved = False
     if request.method == "POST":
+        member = Member.objects.create(
+            email=request.POST['EMAIL']
+        )
         form = HomeForm(request.POST)
         if form.is_valid():
             form.save()
@@ -53,6 +75,9 @@ def elements(request):
     number = random.randint(1234567890, 1234567890123456789)
     saved = False
     if request.method == "POST":
+        member = Member.objects.create(
+            email=request.POST['EMAIL']
+        )
         form = ElementForm(request.POST)
         if form.is_valid():
             form.save()
@@ -64,11 +89,11 @@ def elements(request):
             saved = True
     return render(request, 'elements.html',{'form':form, 'saved':saved})
 
-def coursedetails(request):
-    lessons = Lesson.objects.all()[6:]
-    return render(request, 'course-details.html',{'lessons':lessons})
-
 def blog(request):
+    if request.method == "POST":
+        member = Member.objects.create(
+            email=request.POST['EMAIL']
+        )
     authors = Author.objects.all()
     blogs = Blog.objects.all()
 
@@ -79,6 +104,10 @@ def blog(request):
     return render(request, 'blog-home.html',{'blogs':blogs,'authors':authors, 'getpages':users, 'nums':nums})
 
 def author(request, author_name):
+    if request.method == "POST":
+        member = Member.objects.create(
+            email=request.POST['EMAIL']
+        )
     author = Author.objects.get(author_name=author_name)
     return render(request, 'author.html',{'author':author})
 
@@ -100,6 +129,9 @@ def blogdetails(request,pk):
     comments = Comment.objects.filter(choose = blog)
      
     if request.method == 'POST':
+        member = Member.objects.create(
+            email=request.POST['EMAIL']
+        )
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = Comment(name= form.cleaned_data['name'],
@@ -124,6 +156,9 @@ def contacts(request):
     number = random.randint(1234567890, 1234567890123456789)
     saved = False
     if request.method == "POST":
+        member = Member.objects.create(
+            email=request.POST['EMAIL']
+        )
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
