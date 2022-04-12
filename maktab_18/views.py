@@ -78,8 +78,8 @@ def blog(request):
     nums = "a" * users.paginator.num_pages
     return render(request, 'blog-home.html',{'blogs':blogs,'authors':authors, 'getpages':users, 'nums':nums})
 
-def author(request, author_id):
-    author = Author.objects.get(pk=author_id)
+def author(request, author_name):
+    author = Author.objects.get(author_name=author_name)
     return render(request, 'author.html',{'author':author})
 
 def lessons(request, pk):
@@ -107,7 +107,7 @@ def blogdetails(request,pk):
             comment=form.cleaned_data['comment'],
             choose=blog)
             comment.save()
-            return redirect(f'/blog/details/{pk}')
+            return redirect(f'/blog/details/{pk}/')
     else:
         form = CommentForm()
     authors = Author.objects.all()

@@ -13,6 +13,6 @@ urlpatterns = [
     path('ariza-topshirish/',views.elements,name='elements'),
     path('blog/',views.blog,name='blog'),
     path('blog/details/<int:pk>/',views.blogdetails, name='blog-single'),
-    path('author/<author_id>/',views.author, name='author'),
+    path('author/<author_name>/',views.author, name='author'),
     path('contacts/',views.contacts,name='contacts')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

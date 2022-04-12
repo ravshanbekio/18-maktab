@@ -106,7 +106,7 @@ class Comment(models.Model):
     choose = models.ForeignKey(Blog, on_delete=models.CASCADE, editable=True)
     name = models.CharField('Ism',max_length=150, null=True, blank=True, editable=True)
     email = models.EmailField('Elektron Pochta',null=True, blank=True, editable=True)
-    date_comment = models.DateField('Sana', null=True, blank=True, editable=True)
+    date_comment = models.DateField('Sana', null=True, blank=True, editable=True, auto_now_add=True)
     comment = models.TextField('Izoh',null=True, blank=True, editable=True)
 
     def __str__(self):
