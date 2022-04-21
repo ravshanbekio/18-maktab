@@ -139,3 +139,17 @@ class ExamQuestion(models.Model):
 
     class Meta:
         verbose_name_plural = "Imtixon savollari portali"
+
+class TheBestPupils(models.Model):
+    pupil_name = models.CharField(max_length=150)
+    about_pupil = models.TextField(max_length=700)
+    pupil_photo = CloudinaryField()
+    start_study_years = models.DateField()
+    end_study_years = models.DateField()
+    views = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.pupil_name
+
+    class Meta:
+        verbose_name_plural = "Eng yaxshi o'quvchilar"

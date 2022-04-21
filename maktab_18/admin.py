@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Home, Member, Text, Element, Lesson, Blog, Contact, Author, Comment, Feedback, ExamQuestion
+from .models import Home, Member, Text, Element, Lesson, Blog, Contact, Author, Comment, Feedback, ExamQuestion, TheBestPupils
 
 @admin.register(Home)
 class HomeAdmin(admin.ModelAdmin):
@@ -45,3 +45,4 @@ admin.site.register(Blog)
 admin.site.register(Comment)
 admin.site.register(Feedback)
 admin.site.register(ExamQuestion)
+admin.site.register(TheBestPupils)
