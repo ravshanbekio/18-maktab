@@ -126,3 +126,16 @@ class Feedback(models.Model):
     class Meta:
         ordering = ['course',]
         verbose_name_plural = "Fikrlar"
+
+class ExamQuestion(models.Model):
+    name = models.CharField(max_length=100)
+    exam_file = CloudinaryField()
+    photo = CloudinaryField(blank=True, null=True)
+    link = models.URLField(blank=True, null=True)
+    exam_views = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Imtixon savollari portali"
