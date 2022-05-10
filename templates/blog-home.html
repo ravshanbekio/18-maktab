@@ -41,7 +41,7 @@
 		<nav class="navbar navbar-expand-lg  navbar-light">
 			<div class="container">
 				<a class="navbar-brand" href="{% url 'home' %}">
-					<h4>18-Maktab</h4>
+					<h4 style="color: white;">18-Maktab</h4>
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 				 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -191,7 +191,7 @@
 								</ul>
 								<div class="user-details row">
 									{% for author in authors %}
-										<p class="user-name col-lg-12 col-md-12 col-6"><a href="{% url 'author' author.id %}">{{ author.author_name }}</a> <span class="lnr lnr-user"></span></p>
+										<p class="user-name col-lg-12 col-md-12 col-6"><a href="{% url 'author' author.author_name %}">{{ author.author_name }}</a> <span class="lnr lnr-user"></span></p>
 									{% endfor %}
 										<p class="date col-lg-12 col-md-12 col-6">{{ blog.date }} <span class="lnr lnr-calendar-full"></span></p>
 								</div>
