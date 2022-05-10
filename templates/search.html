@@ -104,7 +104,7 @@
         <div class="col">
             {% if searched %}
                 <center>
-                    <h1 style="text-align: center;">Natija - {{ searched }}</h1>
+                    <h1 style="text-align: center;">So'rov - <i>"{{ searched }}"</i></h1>
                     {% if values %}
                       {% for value in values %}
                           <a href="{% url 'lessons' value.id %}">{{ value }}</a>
@@ -113,6 +113,8 @@
                       {% for blog_value in blog_values %}
                         <a href="{% url 'blog-single' blog_value.id  %}">{{ blog_value }}</a><br>
                       {% endfor %}
+                    {% else %}
+                      <p style="text-align: center;">Ushbu so'rov bo'yicha natijalar topilmadi</p>
                     {% endif %}
                 </center>
             {% else %}
