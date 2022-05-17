@@ -12,18 +12,6 @@ def home(request):
     number = random.randint(1234567890, 1234567890123456789)
     saved = False
     if request.method == "POST":
-        member = Member.objects.create(
-            email=request.POST['EMAIL']
-        )
-        template = render_to_string('email_template.html')
-        email = EmailMessage(
-            "Yangiliklar tasmasiga obuna bo'lganingiz uchun tashakkur!",
-            template,
-            settings.EMAIL_HOST_USER,
-            [member],
-        )
-        email.fail_silently=False
-        email.send()
         form = HomeForm(request.POST)
         if form.is_valid():
             form.save()
@@ -50,6 +38,15 @@ def about(request):
         member = Member.objects.create(
             email=request.POST['EMAIL']
         )
+        template = render_to_string('email_template.html')
+        email = EmailMessage(
+            "18-Maktab'ga xush kelibsiz!",
+            template,
+            settings.EMAIL_HOST_USER,
+            [member.email],
+        )
+        email.fail_silently=False
+        email.send()
         return redirect('about')
     text = Text.objects.all()
     return render(request, 'about.html',{'text':text})
@@ -57,9 +54,6 @@ def courses(request):
     number = random.randint(1234567890, 1234567890123456789)
     saved = False
     if request.method == "POST":
-        member = Member.objects.create(
-            email=request.POST['EMAIL']
-        )
         form = HomeForm(request.POST)
         if form.is_valid():
             form.save()
@@ -75,9 +69,6 @@ def elements(request):
     number = random.randint(1234567890, 1234567890123456789)
     saved = False
     if request.method == "POST":
-        member = Member.objects.create(
-            email=request.POST['EMAIL']
-        )
         form = ElementForm(request.POST)
         if form.is_valid():
             form.save()
@@ -129,9 +120,6 @@ def blogdetails(request,pk):
     comments = Comment.objects.filter(choose = blog)
      
     if request.method == 'POST':
-        member = Member.objects.create(
-            email=request.POST['EMAIL']
-        )
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = Comment(name= form.cleaned_data['name'],

@@ -22,8 +22,8 @@ class ElementsAdmin(admin.ModelAdmin):
 
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
-    fields = ('id','subject','cost','teacher_name','in_week','time','description','image')
-    list_display = ('id','subject','cost')
+    fields = ('subject','cost','teacher_name','in_week','time','description','image')
+    list_display = ('subject','cost')
     list_filter = ('subject','cost')
     ordering = ['subject']
     search_fields = ['subject','cost','description']
