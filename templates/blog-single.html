@@ -210,7 +210,7 @@
 						</div>
 						<div class="single-sidebar-widget user-info-widget">
 							{% for author in authors %}
-								<img src="{% static 'img/blog/user-info.png' %}" alt="">
+								<img src="{{ author.image.url }}" alt="">
 								<a href="{% url 'author' author.author_name %}">
 									<h4>{{ author.author_name }}</h4>
 								</a>

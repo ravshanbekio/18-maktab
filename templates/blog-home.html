@@ -253,8 +253,8 @@
 							</form>
 						</div>
 						<div class="single-sidebar-widget user-info-widget">
-							<img src="{% static 'img/blog/user-info.png' %}" alt="">
 							{% for author in authors %}
+								<img src="{{ author.image.url }}" alt="">
 								<p>
 									<h4>{{ author.author_name }}</h4>
 								</p>

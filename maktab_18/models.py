@@ -68,6 +68,7 @@ class Author(models.Model):
     instagram = models.URLField('Instagram')
     telegram = models.URLField('Telegram')
     about_author = models.TextField('Muallif haqida')
+    image = CloudinaryField()
 
     def __str__(self):
         return self.author_name
