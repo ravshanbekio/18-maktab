@@ -20,7 +20,7 @@ def home(request):
         form = HomeForm
         if f'saved{number}' in request.GET:
             saved = True
-    blog = Blog.objects.all()[4:]
+    blog = Blog.objects.all()[:3]
     lessons = Lesson.objects.all()
     return render(request,'index.html',{'form':form,'saved':saved,'blog':blog,'lessons':lessons})
 
@@ -114,9 +114,8 @@ def lessons(request, pk):
         return redirect('lessons', pk=lessons.id)
     return render(request, 'course-details.html',{'lessons':lessons})   
 
-def blogdetails(request,pk):
-    saved = False
-    blog = Blog.objects.get(pk=pk)
+def blogdetails(request,title):
+    blog = Blog.objects.get(title=title)
     comments = Comment.objects.filter(choose = blog)
      
     if request.method == 'POST':
@@ -127,7 +126,7 @@ def blogdetails(request,pk):
             comment=form.cleaned_data['comment'],
             choose=blog)
             comment.save()
-            return redirect(f'/blog/details/{pk}/')
+            return redirect(f'/blog/details/{title}/')
     else:
         form = CommentForm()
     authors = Author.objects.all()
@@ -144,9 +143,6 @@ def contacts(request):
     number = random.randint(1234567890, 1234567890123456789)
     saved = False
     if request.method == "POST":
-        member = Member.objects.create(
-            email=request.POST['EMAIL']
-        )
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()

@@ -160,7 +160,7 @@
 						<div class="content relative">
 							<div class="overlay overlay-bg"></div>
 							{% for author in authors %}
-								<a href="{% url 'author' author.id %}" target="_blank">
+								<a href="{% url 'author' author.author_name %}">
 							{% endfor %}
 								<div class="thumb">
 									<img class="content-image img-fluid d-block mx-auto" src="{% static 'img/blog/cat-widget3.jpg' %}" alt="">
@@ -205,9 +205,9 @@
 										<h3>{{ blog.title }}</h3>
 									</a>
 									<p class="excert">
-										{{ blog.text }}
+										{{ blog.text|slice:"90" }}
 									</p>
-								<a href="{% url 'blog-single' blog.id %}" class="view-more-btn">Batafsil</a>
+								<a href="{% url 'blog-single' blog.title %}" class="view-more-btn">Batafsil</a>
 							</div>
 						</div>
 					{% endfor %}

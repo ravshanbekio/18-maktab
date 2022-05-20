@@ -3,8 +3,8 @@ from .models import Home, Member, Text, Element, Lesson, Blog, Contact, Author, 
 
 @admin.register(Home)
 class HomeAdmin(admin.ModelAdmin):
-    fields = ('id','name','phone_number','email')
-    list_display = ('id','name','phone_number','email')
+    fields = ('name','phone_number','email')
+    list_display = ('name','phone_number','email')
     list_filter = ('name','phone_number')
     ordering = ['name']
     search_fields = ['name','email']
@@ -14,8 +14,8 @@ admin.site.register(Text)
 
 @admin.register(Element)
 class ElementsAdmin(admin.ModelAdmin):
-    fields = ('id','name','sourname','email','address','phone_number','message')
-    list_display = ('id','name','sourname','phone_number')
+    fields = ('name','sourname','email','address','phone_number','message')
+    list_display = ('name','sourname','phone_number')
     list_filter = ('name','sourname','address','phone_number')
     ordering = ['name','sourname']
     search_fields = ['name','sourname','phone_number']
@@ -30,7 +30,7 @@ class LessonAdmin(admin.ModelAdmin):
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    fields = ('id','name','email','theme','message')
+    fields = ('name','email','theme','message')
     list_display = ('id','name','email')
     search_fields = ['name','email']
 
