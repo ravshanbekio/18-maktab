@@ -111,7 +111,7 @@
                       {% endfor %}
                     {% elif blog_values %}
                       {% for blog_value in blog_values %}
-                        <a href="{% url 'blog-single' blog_value.id  %}">{{ blog_value }}</a><br>
+                        <a href="{% url 'blog-single' blog_value.title  %}">{{ blog_value }}</a><br>
                       {% endfor %}
                     {% else %}
                       <p style="text-align: center;">Ushbu so'rov bo'yicha natijalar topilmadi</p>
@@ -162,22 +162,6 @@
                     <li><a href="#">Experts</a></li>
                     <li><a href="#">Agencies</a></li>
                 </ul>
-            </div>
-            <div class="col-lg-4 col-md-6 single-footer-widget">
-                <h4>Yangilklar tasmasi</h4>
-                <p>Yangiklardan xabardor bo'lib turish uchun obuna bo'ling</p>
-                <div class="form-wrap" id="mc_embed_signup">
-                    <form method="POST" class="form-inline">{% csrf_token %}
-                        <input class="form-control" name="EMAIL" placeholder="Elektron Pochta" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Elektron Pochta '"
-                         required="" type="email">
-                        <button class="click-btn btn btn-default text-uppercase">obuna</button>
-                        <div style="position: absolute; left: -5000px;">
-                            <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
-                        </div>
-
-                        <div class="info"></div>
-                    </form>
-                </div>
             </div>
         </div>
         <div class="footer-bottom row align-items-center">

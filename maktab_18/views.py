@@ -85,6 +85,16 @@ def blog(request):
         member = Member.objects.create(
             email=request.POST['EMAIL']
         )
+        template = render_to_string('email_template.html')
+        email = EmailMessage(
+            "18-Maktab'ga xush kelibsiz!",
+            template,
+            settings.EMAIL_HOST_USER,
+            [member.email],
+        )
+        email.fail_silently=False
+        email.send()
+        return redirect('blog')
     authors = Author.objects.all()
     blogs = Blog.objects.all()
 
@@ -99,6 +109,16 @@ def author(request, author_name):
         member = Member.objects.create(
             email=request.POST['EMAIL']
         )
+        template = render_to_string('email_template.html')
+        email = EmailMessage(
+            "18-Maktab'ga xush kelibsiz!",
+            template,
+            settings.EMAIL_HOST_USER,
+            [member.email],
+        )
+        email.fail_silently=False
+        email.send()
+        return redirect(f'/author/{author_name}/')
     author = Author.objects.get(author_name=author_name)
     return render(request, 'author.html',{'author':author})
 
