@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'maktab_18.apps.Maktab18Config',
     'storages',
     'cloudinary',
+    'admin_honeypot',
 ]
 
 MIDDLEWARE = [

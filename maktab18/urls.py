@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',include('maktab_18.urls'))
+    path('admin/', include('admin_honeypot.urls')),
+    path('panels/manager/admin/',admin.site.urls),
+    path('',include('maktab_18.urls')),
 ]
