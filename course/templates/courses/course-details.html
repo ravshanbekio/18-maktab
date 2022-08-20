@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ course.course_name }} {% endblock title %}
+
+{% block content %}
+    <!-- ================ start banner Area ================= -->
+    <section class="banner-area">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-12 banner-right">
+                    <h1 class="text-white">
+                        Kursga yozilish
+                    </h1>
+                    <p class="mx-auto text-white  mt-20 mb-40">
+                        Ushbu bo'lim orqali kurslar haqida ma'lumotlarga ega bo'lishingiz mumkin
+                    </p>
+                    <div class="link-nav">
+                        <span class="box">
+                            <a href="{% url 'home' %}">Bosh sahifa </a>
+                            <i class="lnr lnr-arrow-right"></i>
+                            <a href="{% url 'home' %}">Murojaat </a>
+                            <i class="lnr lnr-arrow-right"></i>
+                            <a href="{% url 'courses' %}">Kursga yozilish</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ================ End banner Area ================= -->
+
+    <!--================ Start Course Details Area =================-->
+    <section class="course-details-area section-gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 course-details-left">
+                    <div class="main-image">
+                        <img class="img-fluid" src="{{ course.course_photo.url }}" alt="">
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 right-contents">
+                    <ul>
+                        <li>
+                            <a class="justify-content-between d-flex" href="">
+                                <p>O'qituvchi ismi</p>
+                                <span class="or">{{ course.course_teacher }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="justify-content-between d-flex" href="">
+                                <p>Kurs narxi </p>
+                                {% if course.course_cost == 0 %}
+                                    <span>Tekin</span>
+                                {% else %}
+                                    <span>{{ course.course_cost }}</span>
+                                {% endif %}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="justify-content-between d-flex" href="">
+                                <p>Haftada </p>
+                                <span>{{ course.in_week }} kun</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="justify-content-between d-flex" href="">
+                                <p>Vaqti </p>
+                                <span>{{ course.time }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <a href="{% url 'add-student' course.slug %}" class="btn text-uppercase enroll">Kursga yozilish</a>
+
+                    <h4 class="title">Baholash</h4>
+                    <div class="content">
+                        <div class="review-top row pt-40">
+                        </div>
+                        <div class="feedeback">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p class="alert alert-warning">{{ message }}</p>
+                                {% endfor %}
+                            {% endif %}
+                            <form method="POST">{% csrf_token %}
+                                <h6 class="mb-10">Fikringiz</h6>
+                                {{ form.as_p }}
+                                <div class="mt-10 text-right">
+                                    <button type="submit" class="btn text-center text-uppercase enroll">Yuborish</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================ End Course Details Area =================-->
+{% endblock content %}

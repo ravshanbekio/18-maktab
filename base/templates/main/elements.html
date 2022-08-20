@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Ariza topshirish {% endblock title %}
+
+{% block content %}
+<!-- ================ start banner Area ================= -->
+	<section class="banner-area">
+		<div class="container">
+			<div class="row justify-content-center align-items-center">
+				<div class="col-lg-12 banner-right">
+					<h1 class="text-white">
+						Ariza topshirish
+					</h1>
+					<p class="mx-auto text-white  mt-20 mb-40">
+						Maktabimizda o'qish istagingiz bo'lsa quyidagi formani to'diring
+					</p>
+					<div class="link-nav">
+						<span class="box">
+							<a href="{% url 'home' %}">Bosh sahifa </a>
+							<i class="lnr lnr-arrow-right"></i>
+							<a href="{% url 'add-to-school' %}">Ariza topshirish</a>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- ================ End banner Area ================= -->
+
+	<!-- Start Align Area -->
+	<div class="whole-wrap">
+		<div class="container">
+			<div class="section-top-border">
+				<div class="row">
+					<div class="col-lg-12">
+						<blockquote class="generic-blockquote">
+							“Yaratuvchanlik shunchaki narsalarni bir-biriga bog‘lashdir. Yaratuvchan odamlardan biror
+							nimani qanday bajarganini so‘rasang, ular o‘zlarini biroz aybdor his qiladi, sababi ular
+							aslida bu ishni qilishmagan, ular shunchaki nimanidir ko‘ra olishgan” <br>
+							<p style="text-align: right;"> Stiv Jobs</p>
+						</blockquote>
+					</div>
+				</div>
+			</div>
+			<div class="section-top-border">
+				<h3>Galereya</h3>
+				<div class="row gallery-item">
+					<div class="col-md-4">
+						<a href="{% static 'img/school.jpg' %}" class="img-pop-up">
+							<div class="single-gallery-image"
+								style="background: url({% static 'img/school.jpg' %});"></div>
+						</a>
+					</div>
+					<div class="col-md-4">
+						<a href="{% static 'img/classroom.jpg' %}" class="img-pop-up">
+							<div class="single-gallery-image"
+								style="background: url({% static 'img/classroom.jpg' %});"></div>
+						</a>
+					</div>
+					<div class="col-md-4">
+						<a href="{% static 'img/classroom2.jpg' %}" class="img-pop-up">
+							<div class="single-gallery-image"
+								style="background: url({% static 'img/classroom2.jpg' %});"></div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="section-top-border">
+				<div class="row">
+					<div class="col-lg-8 col-md-8">
+						{% if saved %}
+						<h3>
+							<p class="text-uppercase text-success">Ma'lumot yuborildi!</p>
+						</h3>
+						{% else %}
+						<h3 class="mb-30">Forma elementlari</h3>
+						<form action="{% url 'add-to-school' %}" method=POST>
+							{% csrf_token %}
+							<div class="mt-10">
+								{{ form.as_p }}
+							</div>
+							<button class="view-more-btn">Yuborish</button>
+						</form>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Align Area -->
+{% endblock content %}

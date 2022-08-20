@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+
+{% block title %} Kurslar {% endblock title %}
+
+{% block content %}
+  <!-- ================ start banner Area ================= -->
+  <section class="banner-area">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-12 banner-right">
+            <h1 class="text-white">
+              Kurslar
+            </h1>
+            <p class="mx-auto text-white  mt-20 mb-40">
+              Ushbu sahifa orqali maktabimizda tashkil etilgan kurslarga yozilishingiz mumkin
+            </p>
+            <div class="link-nav">
+              <span class="box">
+                <a href="{% url 'home' %}">Bosh sahifa </a>
+                <i class="lnr lnr-arrow-right"></i>
+                <a href="{% url 'courses' %}">Kurslar</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <!-- ================ End banner Area ================= -->
+
+  <!-- ================ Start Feature Area ================= -->
+  <section class="feature-area">
+    <div class="container-fluid">
+      <div class="feature-inner row">
+        <div class="col-lg-2 col-md-6">
+          <div class="feature-item d-flex">
+            <i class="ti-book"></i>
+            <div class="ml-20">
+              <h4>Yangi Sinflar</h4>
+              <p>
+                O'quvchilar uchun qulay bo'lgan sinflar
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <div class="feature-item d-flex">
+            <i class="ti-cup"></i>
+            <div class="ml-20">
+              <h4>Top Kurslar</h4>
+              <p>
+                Darslardan tashqari darslardek sifatli kurslar
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <div class="feature-item d-flex border-right-0">
+            <i class="ti-desktop"></i>
+            <div class="ml-20">
+              <h4>Bestseller Kitoblar</h4>
+              <p>
+                Bestseller kitoblar jamlangan kutubxona
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ End Feature Area ================= -->
+
+  <!-- ================ Start Popular Course Area ================= -->
+  <section class="popular-course-area section-gap">
+    <div class="container-fluid">
+      <div class="row justify-content-center section-title">
+        <div class="col-lg-12">
+          <h2>
+            Eng Yaxshi Kurslar <br />
+            Faoliyat Yuritmoqda!
+          </h2>
+          <p>
+            Bu bo'limda darslardan tashqari bo'layotgan kurslar ro'yxati bilan tanishishingiz mumkin.
+          </p>
+        </div>
+      </div>
+      <div class="owl-carousel popuar-course-carusel">
+        {% for course in courses %}
+          <div class="single-popular-course">
+            <div class="thumb">
+              <img class="f-img img-fluid mx-auto" src="{{ course.course_photo.url }}" alt="" />
+            </div>
+            <div class="details">
+              <div class="d-flex justify-content-between mb-20">
+                <p class="name">{{ course.course_name }}</p>
+                <p class="value">{{ course.cost }}</p>
+              </div>
+              <a href="{% url 'course-detail' course.slug %}">
+                <h4>{{ course.course_description }}</h4>
+              </a>
+              <div class="bottom d-flex mt-15">
+                <ul class="list">
+                  <li>
+                    <a href="#"><i class="fa fa-star"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa fa-star"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa fa-star"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa fa-star"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa fa-star"></i></a>
+                  </li>
+                </ul>
+                <p class="ml-20">{{ course.views }} Ko'rishlar</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  <!-- ================ End Popular Course Area ================= -->
+
+  <!-- ================ Start Feature Area ================= -->
+  <section class="other-feature-area">
+      <div class="container">
+        <div class="feature-inner row">
+          <div class="col-lg-12">
+            <div class="section-title text-left">
+              <h2>
+                Maktabning Qanday <br />
+                Afzalliklari Bor?
+              </h2>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="other-feature-item">
+              <i class="ti-key"></i>
+              <h4>Tajribali ustozlar</h4>
+              <div>
+                <p>
+                  Tajribali ustozlardan bilim olib, kelajakda
+                yetuk kadr bo'lib yetishish imkoniyatiga ega
+                bo'lasiz. Bundan tashqari, quvnoqlik kun davomida
+                kayfiyatingiz yuqori bo'lishiga sabab bo'ladi.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mt--160">
+            <div class="other-feature-item">
+              <i class="ti-files"></i>
+              <h4>Qulay va shinam xonalar</h4>
+              <div>
+                <p>
+                  Bilim olish uchun yaratilgan barcha sharoitlar o'quvchilar
+                  uchun! Har bir xona sizning qulayligingizni ta'minlaydi.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mt--260">
+            <div class="other-feature-item">
+              <i class="ti-medall-alt"></i>
+              <h4>Bilimlar tahlili</h4>
+              <div>
+                <p>
+                  Tengdoshlar bilan issiq kofe ustida bilimlar tahlilini qilishga
+                nima yetsin? Shunday tengdoshlar bilan birga o'qish esa, saxshiy fikr va
+                nutqingiz rivojlanishida o'zining ijobiy ta'sirini ko'rsatadi.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="other-feature-item">
+              <i class="ti-briefcase"></i>
+              <h4>Top kurslar</h4>
+              <div>
+                <p>
+                  Darsdan tashqari kurslar bilimlaringizni yanada mustahkamlab,
+                  yangi bilimlar olishingizga hamda o'ylagan maqsadlaringiz sari 
+                  odimlab borishingizni ta'minlaydi.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mt--160">
+            <div class="other-feature-item">
+              <i class="ti-crown"></i>
+              <h4>Ekspertlar yordami</h4>
+              <div>
+                <p>
+                  Har qanday holatda ekspertlardan yordam so'rash, fikr almashish va 
+                  ular bergan yo'l-yo'riqlardan yurish maqsadlaringiz amalga oshishiga 
+                  o'z hissasini qo'shadi.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mt--260">
+            <div class="other-feature-item">
+              <i class="ti-headphone-alt"></i>
+              <h4>So'nggi texnologiyalar</h4>
+              <div>
+                <p>
+                  Zamonaviy kompyuterlarga ega Informatika xonasi hamda 
+                  bepul Wi-Fi tarmog'i orqali Texnologiyalar asrida zamonaviy 
+                  ta'lim olish! Bu imkoniyatlar sizning kelajakda
+                  proffessional bo'lishingizga yordam beradi.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ================ End Feature Area ================= -->
+{% endblock content  %}

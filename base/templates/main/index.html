@@ -1,0 +1,406 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Bosh sahifa {% endblock title %}
+
+{% block content %}
+  <!-- ================ start banner Area ================= -->
+  <section class="home-banner-area">
+    <div class="container">
+      <div class="row justify-content-center fullscreen align-items-center">
+        <div class="col-lg-5 col-md-8 home-banner-left">
+          <h1 class="text-white">
+            Muvaffaqiyatli Qadamlaringizni<br />
+            Biz Bilan Boshlang!
+          </h1>
+        </div>
+        <div class="offset-lg-2 col-lg-5 col-md-12 home-banner-right">
+          <img class="img-fluid" src="{% static 'img/header-img.png' %}" alt="" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ End banner Area ================= -->
+
+  <!-- ================ Start Feature Area ================= -->
+  <section class="feature-area">
+    <div class="container-fluid">
+      <div class="feature-inner row">
+        <div class="col-lg-2 col-md-6">
+          <div class="feature-item d-flex">
+            <i class="ti-book"></i>
+            <div class="ml-20">
+              <h4>Yangi Sinflar</h4>
+              <p>
+                O'quvchilar uchun qulay bo'lgan sinflar
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <div class="feature-item d-flex">
+            <i class="ti-cup"></i>
+            <div class="ml-20">
+              <h4>Top Kurslar</h4>
+              <p>
+                Darslardan tashqari darslardek sifatli kurslar
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <div class="feature-item d-flex border-right-0">
+            <i class="ti-desktop"></i>
+            <div class="ml-20">
+              <h4>Bestseller Kitoblar</h4>
+              <p>
+                Bestseller kitoblar jamlangan kutubxona
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ End Feature Area ================= -->
+
+  <!-- ================ Start Popular Course Area ================= -->
+  <section class="popular-course-area section-gap">
+    <div class="container-fluid">
+      <div class="row justify-content-center section-title">
+        <div class="col-lg-12">
+          <h2>
+            Eng Yaxshi Kurslar <br />
+            Faoliyat Yuritmoqda! 
+          </h2>
+          <p>
+            Bu bo'limda darslardan tashqari bo'layotgan kurslar ro'yxati bilan tanishishingiz mumkin.
+          </p>
+        </div>
+      </div>
+      <div class="owl-carousel popuar-course-carusel">
+        {% for course in courses %}
+          <div class="single-popular-course">
+            <div class="thumb">
+              <img class="f-img img-fluid mx-auto" src="{{ course.course_photo.url }}" alt="" />
+            </div>
+            <div class="details">
+              <div class="d-flex justify-content-between mb-20">
+                <p class="name">{{ course.course_name |title}}</p>
+                {% if course.course_cost == 0 %}
+                  <p class="value">Tekin</p>
+                {% else %}
+                  <p class="value">{{ course.course_cost }}</p>
+                {% endif %}
+              </div>
+                <a href="{% url 'course-detail' course.slug %}">
+                <h4>{{ course.course_description|title|truncatewords:7 }}</h4>
+              </a>
+              <div class="bottom d-flex mt-15">
+                <ul class="list">
+                  <li>
+                    <a href="#"><i class="fa fa-star"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa fa-star"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa fa-star"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa fa-star"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa fa-star"></i></a>
+                  </li>
+                </ul>
+                <p class="ml-20">{{ course.views }} Ko'rishlar</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  <!-- ================ End Popular Course Area ================= -->
+
+  <!-- ================ Start Video Area ================= -->
+  <section class="video-area section-gap-bottom">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-5">
+          <div class="section-title text-white">
+            <h2 class="text-white">
+              Mashg'ulotlarimizni  <br>
+              Tomosha qiling
+            </h2>
+          </div>
+        </div>
+        <div class="offset-lg-1 col-md-6 video-left">
+          <div class="owl-carousel video-carousel">
+            <div class="single-video">
+              <div class="video-part">
+                <img class="img-fluid" src="{% static 'img/video-img.jpg' %}" alt="">
+                <div class="overlay"></div>
+                <a class="popup-youtube play-btn" href="">
+                  <img class="play-icon" src="{% static 'img/play-btn.png' %}" alt="">
+                </a>
+              </div>
+              <h4 class="text-white mb-20 mt-30">18-Maktabda Bir Kun...</h4>
+              <p class="text-white mb-20">
+                Maktabimizdagi o'qitish tizimi, o'quvchilar uchun yaratilgan qulayliklar va boshqa shart-sharoitlar
+                aks etgan video. Batafsil tomosha qiling!
+              </p>
+            </div>
+
+            <div class="single-video">
+              <div class="video-part">
+                <img class="img-fluid" src="{% static 'img/video-img.jpg' %}" alt="">
+                <div class="overlay"></div>
+                <a class="popup-youtube play-btn" href="https://www.youtube.com/watch?v=VufDd-QL1c0">
+                  <img class="play-icon" src="{% static 'img/play-btn.png' %}" alt="">
+                </a>
+              </div>
+              <h4 class="text-white mb-20 mt-30">18-Maktabda Bir Kun...</h4>
+              <p class="text-white mb-20">
+                Maktabimizdagi o'qitish tizimi, o'quvchilar uchun yaratilgan qulayliklar va boshqa shart-sharoitlar
+                aks etgan video. Batafsil tomosha qiling!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ End Video Area ================= -->
+
+  <!-- ================ Start Feature Area ================= -->
+  <section class="other-feature-area">
+    <div class="container">
+      <div class="feature-inner row">
+        <div class="col-lg-12">
+          <div class="section-title text-left">
+            <h2>
+              Maktabning Qanday <br />
+              Afzalliklari Bor?
+            </h2>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="other-feature-item">
+            <i class="ti-key"></i>
+            <h4>Tajribali ustozlar</h4>
+            <div>
+              <p>
+                Tajribali ustozlardan bilim olib, kelajakda
+                yetuk kadr bo'lib yetishish imkoniyatiga ega
+                bo'lasiz. Bundan tashqari, quvnoqlik kun davomida
+                kayfiyatingiz yuqori bo'lishiga sabab bo'ladi.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt--160">
+          <div class="other-feature-item">
+            <i class="ti-files"></i>
+            <h4>Qulay va shinam xonalar</h4>
+            <div>
+              <p>
+                Bilim olish uchun yaratilgan barcha sharoitlar o'quvchilar
+                uchun! Har bir xona sizning qulayligingizni ta'minlaydi.
+                
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt--260">
+          <div class="other-feature-item">
+            <i class="ti-medall-alt"></i>
+            <h4>Bilimlar tahlili</h4>
+            <div>
+              <p>
+                Tengdoshlar bilan issiq kofe ustida bilimlar tahlilini qilishga
+                nima yetsin? Shunday tengdoshlar bilan birga o'qish esa, shaxsiy fikr va
+                nutqingiz rivojlanishida o'zining ijobiy ta'sirini ko'rsatadi.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="other-feature-item">
+            <i class="ti-briefcase"></i>
+            <h4>Top kurslar</h4>
+            <div>
+              <p>
+                Darsdan tashqari kurslar bilimlaringizni yanada mustahkamlab,
+                yangi bilimlar olishingizga hamda o'ylagan maqsadlaringiz sari 
+                odimlab borishingizni ta'minlaydi.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt--160">
+          <div class="other-feature-item">
+            <i class="ti-crown"></i>
+            <h4>Ekspertlar yordami</h4>
+            <div>
+              <p>
+                Har qanday holatda ekspertlardan yordam so'rash, fikr almashish va 
+                ular bergan yo'l-yo'riqlardan yurish maqsadlaringiz amalga oshishiga 
+                o'z hissasini qo'shadi.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt--260">
+          <div class="other-feature-item">
+            <i class="ti-headphone-alt"></i>
+            <h4>So'nggi texnologiyalar</h4>
+            <div>
+              <p>
+                Zamonaviy kompyuterlarga ega Informatika xonasi hamda 
+                bepul Wi-Fi tarmog'i orqali Texnologiyalar asrida zamonaviy 
+                ta'lim olish! Bu imkoniyatlar sizning kelajakda
+                proffessional bo'lishingizga yordam beradi.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ End Feature Area ================= -->
+
+  <!-- ================ Start Testimonials Area ================= -->
+  <section class="testimonials-area section-gap">
+    <div class="container">
+      <div class="testi-slider owl-carousel" data-slider-id="1">
+        <div class="row align-items-center">
+          <div class="col-lg-5">
+            <div class="item">
+              <div class="testi-item">
+                <img src="{% static 'img/quote.png' %}" alt="" />
+                <div class="mt-40 text">
+                  <p>
+                    "Katta g'alaba qozonish uchun ba'zan katta tavakkal qilish kerak!"
+                  </p>
+                </div>
+                <h4>Bill Geyts</h4>
+                <p>MICROSOFT kompaniyasi asoschisi, tadbirkor</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="offset-lg-1 col-lg-6">
+            <img src="{% static 'img/testimonial/images.jpg' %}" alt="" />
+          </div>
+        </div>
+
+        <div class="row align-items-center">
+          <div class="col-lg-5">
+            <div class="item">
+              <div class="testi-item">
+                <img src="{% static 'img/quote.png' %}" alt="" />
+                <div class="mt-40 text">
+                  <p>
+                    "Biz muvaffaqiyatdan emas, muvaffaqiyatsizlikdan tajriba olamiz"
+                  </p>
+                </div>
+                <h4>Bram Stoker</h4>
+                <p>Yozuvchi</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="offset-lg-1 col-lg-6">
+            <img src="{% static 'img/testimonial/images2.jpg' %}" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ End Testimonials Area ================= -->
+
+  <!-- ================ Start Registration Area ================= -->
+  <section class="registration-area">
+    <div class="container">
+      <div class="row align-items-end">
+        <div class="col-lg-5">
+          <div class="section-title text-left text-white">
+            <h2 class="text-white">
+              Murabbiylarimizdan <br>
+              Ta'lim Oling
+            </h2>
+            <p>
+              Tajribali hamda quvnoq o'qituvchilar, qulay va shinam xonalar sizni kutmoqda!
+            </p>
+          </div>
+        </div>
+        <div class="offset-lg-3 col-lg-4 col-md-6">
+          <div class="course-form-section">
+            <h3 class="text-white">Kurslarga yozilish</h3>
+            <p class="text-white">O'rganish vaqti keldi!</p>
+            {% if saved %}
+              <p class="text text-uppercase text-white">Ma'lumot yuborildi!</p>
+            {% else %}
+              <form class="course-form-area contact-page-form course-form text-right" id="myForm" action="{% url 'home' %}" method=POST>
+                {% csrf_token %}
+                  <div class="form-group col-md-12">
+                    {{ form.as_p }}
+                  </div>
+                  <div class="col-lg-12 text-center">
+                    <button class="btn text-uppercase">Yuborish</button>
+                  </div>
+              </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ End Registration Area ================= -->
+
+  <!-- ================ Start Blog Post Area ================= -->
+  <section class="blog-post-area section-gap">
+    <div class="container-fluid">
+      <div class="feature-inner row">
+        <div class="col-lg-12">
+          <div class="section-title text-left">
+            <h2>
+              Yangiliklar<br />
+              
+            </h2>
+            <p>
+              Bu bo'limda maktabimzda bo'layotgan so'nggi yangiliklardan xabardor bo'lishingiz mumkin.
+              Barcha yangiliklarni ko'rish uchun <a href="{% url 'blog' %}">Blog</a> sahifasiga tashrif buyuring
+            </p>
+          </div>
+        </div>
+        {% for blog in blogs %}
+          <div class="col-lg-4 col-md-6">
+            <div class="single-blog-post">
+              <img src="{{ blog.photo.url }}" class="img-fluid" alt=""  width="500%"/>
+              <div class="overlay"></div>
+              <div class="top-text">
+                <p>{{ blog.date }}</p>
+              </div>
+              <div class="text">
+                <h4 class="text-white">{{ blog.title|title }}</h4>
+                <div>
+                  <p>
+                    {{ blog.subtitle|title|truncatewords:10 }}
+                  </p>
+                </div>
+                <a href="{% url 'blog-detail' blog.date blog.slug %}" class="primary-btn">
+                  Batafsil
+                  <i class="fa fa-long-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  <!-- ================ End Blog Post Area ================= -->
+{% endblock content %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ search_query }} {% endblock title %}
+
+{% block content %}
+  <section class="home-banner-area">
+    <div class="container">
+      <div class="row justify-content-center fullscreen align-items-center">
+        <div class="col-lg-5 col-md-8 home-banner-left">
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="container">
+    <div class="row mt-5">
+        <div class="col-lg-8 posts-list">
+            {% for blog in blogs %}
+                <div class="single-post row">
+                    <div class="col-lg-3  col-md-3 meta-details">
+                        <ul class="tags">
+                        </ul>
+                        <div class="user-details row">
+                                <p class="user-name col-lg-12 col-md-12 col-6"><a href="#">{{ superuser.first_name }}</a> <span class="lnr lnr-user"></span></p>
+                                <p class="date col-lg-12 col-md-12 col-6">{{ blog.date }}<span class="lnr lnr-calendar-full"></span></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 ">
+                        <div class="feature-img">
+                            <img class="img-fluid" src="{{ blog.photo.url }}" alt="">
+                        </div>
+                        
+                            <a class="posts-title" href="{% url 'blog-detail' blog.date blog.slug %}">
+                                <h3>{{ blog.title|title }}</h3>
+                            </a>
+                            <p class="excert">
+                                {{ blog.subtitle|title|truncatewords:25|linebreaks }}
+                            </p>
+                        <a href="{% url 'blog-detail' blog.date blog.slug %}" class="view-more-btn">Batafsil</a>
+                    </div>
+                </div>
+            {% endfor %}
+            <nav class="blog-pagination justify-content-center d-flex">
+                <ul class="pagination">
+                    {% if getpages.has_previous %}
+                        <li class="page-item">
+                            <a href="?page={{ getpages.previous_page_number}}" class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">
+                                    <span class="lnr lnr-chevron-left"></span>
+                                </span>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for i in nums %}
+                        <li class="page-item">
+                            <a href="?page={{ forloop.counter }}" class="page-link">
+                                {{ forloop.counter }}
+                            </a>    
+                        </li>
+                    {% endfor %}
+
+                    {% if getpages.has_next %}
+                        <li class="page-item">
+                            <a href="?page={{ getpages.next_page_number }}" class="page-link" aria-label="Next">
+                                <span aria-hidden="true">
+                                    <span class="lnr lnr-chevron-right"></span>
+                                </span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+  </div>
+
+{% endblock content %}

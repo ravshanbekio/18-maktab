@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ search_query }} {% endblock title %}
+
+{% block content %}
+  <section class="home-banner-area">
+    <div class="container">
+      <div class="row justify-content-center fullscreen align-items-center">
+        <div class="col-lg-5 col-md-8 home-banner-left">
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="container">
+    <div class="row mt-5">
+        <div class="owl-carousel popuar-course-carusel">
+            {% for course in courses %}
+              <div class="single-popular-course">
+                <div class="thumb">
+                  <img class="f-img img-fluid mx-auto" src="{{ course.course_photo.url }}" alt="" />
+                </div>
+                <div class="details">
+                  <div class="d-flex justify-content-between mb-20">
+                    <p class="name">{{ course.course_name }}</p>
+                    <p class="value">{{ course.cost }}</p>
+                  </div>
+                  <a href="{% url 'course-detail' course.slug %}">
+                    <h4>{{ course.course_description }}</h4>
+                  </a>
+                  <div class="bottom d-flex mt-15">
+                    <ul class="list">
+                      <li>
+                        <a href="#"><i class="fa fa-star"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa fa-star"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa fa-star"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa fa-star"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa fa-star"></i></a>
+                      </li>
+                    </ul>
+                    <p class="ml-20">{{ course.views }} Ko'rishlar</p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+    </div>
+  </div>
+
+{% endblock content %}
