@@ -1,4 +1,4 @@
-# 18-maktab-
+# 18-maktab
 Website for School (18)
 
 It's time to line up schools! This project pursues exactly that goal.
