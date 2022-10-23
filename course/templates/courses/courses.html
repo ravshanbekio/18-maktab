@@ -3,6 +3,7 @@
 {% block title %} Kurslar {% endblock title %}
 
 {% block content %}
+{% load tags %}
   <!-- ================ start banner Area ================= -->
   <section class="banner-area">
       <div class="container">
@@ -91,7 +92,7 @@
             </div>
             <div class="details">
               <div class="d-flex justify-content-between mb-20">
-                <p class="name">{{ course.course_name }}</p>
+                <p class="name">{{ course.course_name|lowerwords }}</p>
                 <p class="value">{{ course.cost }}</p>
               </div>
               <a href="{% url 'course-detail' course.slug %}">
